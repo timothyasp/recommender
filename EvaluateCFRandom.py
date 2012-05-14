@@ -1,4 +1,5 @@
 import math, random
+from utils import parse, process
 
 """
     A wrapper around the random sampling evaluation technique which performs the
@@ -16,3 +17,13 @@ import math, random
         - method: Collaborative filtering method to use
         - size: number of test cases to generate
 """
+
+if __name__ == '__main__':
+    filename = 'data/jester-data-1.csv'
+    """
+        items[itemID] = { 'val': total value of rankings, 
+    """
+    items = users = {}
+    matrix = []
+    matrix, users, items = parse(filename)
+
