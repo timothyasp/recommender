@@ -1,5 +1,6 @@
 import math, random
 from utils import parse, process
+from techniques import Filter
 
 """
    Wrapper around the User-Specified test. Takes as input a list of
@@ -22,7 +23,7 @@ if __name__ == '__main__':
     matrix = []
     matrix, users, items = parse(filename)
 
-    for row in items.items():
-        print row
+    f = Filter(matrix, users, items)
 
+    f.weighted_sum()
 

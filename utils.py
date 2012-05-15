@@ -25,7 +25,9 @@ def parse(filename):
     user_stats = {}
     reader = csv.reader(open(filename, 'r'), delimiter=',')
     for i, row in enumerate(reader):
-        user_stats[i] = {'num': row[0], 'ratings': [col for col, x in enumerate(row[1:]) if float(x) != 99]}
+        sum_rating = 0
+        user_stats[i] = {'num': row[0], 'ratings': row[1:]} #[col for col, x in enumerate(row[1:])]} #if float(x) != 99]}
+        user_stats[i]['avg_rating'] = sum([float(x) for x in user_stats[i]['ratings'] if float(x) != 99])/int(user_stats[i]['num'])
         matrix.append(row[1:])
         for k, v in enumerate(row):
             if float(v) != 99 and k != 0:
