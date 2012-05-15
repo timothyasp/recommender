@@ -1,4 +1,4 @@
-import math, random
+import math, random, sys, csv
 from utils import parse, process
 from techniques import Filter
 
@@ -18,12 +18,19 @@ from techniques import Filter
 """
 
 if __name__ == '__main__':
-    filename = 'data/jester-data-1.csv'
-    items = users = {}
-    matrix = []
-    matrix, users, items = parse(filename)
+    if len(sys.argv) != 3:
+        print 'Expected input format: python EvaluateCFList.py <method> <testList>'
+    else:
+        method = sys.argv[1]
+        testFile = sys.argv[2]
+        testData = csv.reader(open(testFile, "r"))
 
-    f = Filter(matrix, users, items)
+        filename = 'data/jester-data-1.csv'
+        items = users = {}
+        matrix = []
+        matrix, users, items = parse(filename)
 
-    f.weighted_sum()
+        f = Filter(matrix, users, items)
+        f.execute(method, testData)
+
 
