@@ -26,11 +26,14 @@ if __name__ == '__main__':
         testData = csv.reader(open(testFile, "r"))
 
         filename = 'data/jester-data-1.csv'
-        items = users = {}
+        users = {}
         matrix = []
-        matrix, users, items = parse(filename)
+        matrix, users = parse(filename)
 
-        f = Filter(matrix, users, items)
-        f.execute(method, testData)
+        f = Filter(matrix, users)
+        results = f.execute(method, testData)
 
+        print "MAE: ",f.mean_absolute_error(results)
+        #print "MSE: ",f.mean_squared_error(results)
+        #print "RMSE: ",f.mean_squared_error(results)
 
