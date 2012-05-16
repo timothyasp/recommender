@@ -19,15 +19,21 @@ from techniques import Filter
         - size: number of test cases to generate
 """
 
+def get_ratings(data, userID):
+    return data[userID]['ratings']
+
+def get_val(data, userID, itemID):
+    return float(get_ratings(data, userID)[itemID])
+
 def gen_tests(data, size):
     tests = []
     for i in xrange(size):
         uid = random.randint(0, len(data)-1)
-        iid = random.randint(0, len(data[uid]['ratings'])-1)
-        if float(data[uid]['ratings'][iid]) != 99:
-            tests.append([uid,iid])
-        else:
-            tests.append([uid,random.randint(0, len(data[uid]['ratings'])-1)])
+        iid = random.randint(0, len(get_ratings(data, uid))-1)
+        while get_val(data, uid, iid) == 99:
+            iid = random.randint(0, len(get_ratings(data, uid))-1)
+
+        tests.append([uid,iid])
 
     return tests
 
@@ -66,5 +72,5 @@ if __name__ == '__main__':
             print_evaluation(f, "Cosine Adjusted Weighted Sum", c_a_w_results)
         else:
             results = f.execute(method, testData)
-            print_evaluation(f, results)
+            print_evaluation(f, method, results)
 
