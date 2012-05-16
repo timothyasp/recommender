@@ -1,5 +1,5 @@
 import math, random, sys, csv
-from utils import parse, process
+from utils import parse
 from techniques import Filter
 
 """
@@ -26,11 +26,12 @@ if __name__ == '__main__':
         testData = csv.reader(open(testFile, "r"))
 
         filename = 'data/jester-data-1.csv'
+        items = {}
         users = {}
         matrix = []
-        matrix, users = parse(filename)
+        matrix, users, items = parse(filename)
 
-        f = Filter(matrix, users)
+        f = Filter(matrix, users, items)
         results = f.execute(method, testData)
 
         print "MAE: ",f.mean_absolute_error(results)

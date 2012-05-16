@@ -1,5 +1,5 @@
 import math, random, sys
-from utils import parse, process
+from utils import parse
 from techniques import Filter
 
 """
@@ -31,34 +31,40 @@ def gen_tests(data, size):
 
     return tests
 
+def print_evaluation(f, method, results):
+    print method
+    print "   MAE: ",f.mean_absolute_error(results)
+    print "   MSE: ",f.mean_squared_error(results)
+    print "   RMSE: ",f.root_mean_squared_error(results)
+    print "   NMAE: ",f.normalized_mean_absolute_error(results)
+
 if __name__ == '__main__':
     if len(sys.argv) != 3:
         print 'Expected input format: python EvaluateCFList.py <method> <testList>'
     else:
         filename = 'data/jester-data-1.csv'
+        items = {}
         users = {}
         matrix = []
 
         size = int(sys.argv[2])
 
-        matrix, users = parse(filename)
+        matrix, users, items = parse(filename)
         testData = gen_tests(users, size)
-        f = Filter(matrix, users)
+        f = Filter(matrix, users, items)
 
         method = sys.argv[1]
+        print "Starting predictions"
         if method == 'all':
             w_results = f.execute('weighted_sum', testData)
             a_w_results = f.execute('adj_weighted_sum', testData)
             c_w_results = f.execute('cosine_weighted_sum', testData)
             c_a_w_results = f.execute('cosine_adj_weighted_sum', testData)
-            print "Weighted Sum MAE: ",f.mean_absolute_error(w_results)
-            print "Adjusted Weighted Sum MAE: ",f.mean_absolute_error(a_w_results)
-            print "Cosine Weighted Sum MAE: ",f.mean_absolute_error(c_w_results)
-            print "Cosine Adjusted Weighted Sum MAE: ",f.mean_absolute_error(c_a_w_results)
+            print_evaluation(f, "Weighted Sum", w_results)
+            print_evaluation(f, "Adjusted Weighted Sum", a_w_results)
+            print_evaluation(f, "Cosine Weighted Sum", c_w_results)
+            print_evaluation(f, "Cosine Adjusted Weighted Sum", c_a_w_results)
         else:
             results = f.execute(method, testData)
-
-            print "MAE: ",f.mean_absolute_error(results)
-            #print "MSE: ",f.mean_squared_error(results)
-            #print "RMSE: ",f.mean_squared_error(results)
+            print_evaluation(f, results)
 
