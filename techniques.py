@@ -33,6 +33,8 @@ class Filter:
                     elif method == 'cosine_adj_weighted_sum':
                         predicted = self.weighted_sum(userID, itemID,
                                                       "cosine", True)
+                    """elif method == 'inverse_user_freq':
+                        predicted = """
                     else:
                         print "Method not supported... Exiting."
                         return
@@ -49,6 +51,21 @@ class Filter:
 
     def root_mean_squared_error(self, results):
         return sqrt(sum([(x['predicted'] - x['actual'])**2 for x in results])/len(results))
+
+   """ def inv_user_freq(self, userID, itemID, method):
+        absSim = simSum = 0
+        userx = self.users.get(userID)
+        avg_rating = userx['avg_rating']
+
+        for uIDy, usery in self.users.iteritems():
+            itemVal = float(usery['ratings'][itemID])
+            if userID != uIDy and itemVal != 99:
+                sim = self.sim(method, userx['ratings'], usery['ratings'])
+                absSim += abs(sim)
+                simSum += sim * float(itemVal)
+                    
+        k = 1 / absSim
+        return k*simSum"""
 
     def weighted_sum(self, userID, itemID, method, is_adjusted):
         absSim = simSum = 0
