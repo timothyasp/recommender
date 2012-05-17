@@ -45,3 +45,11 @@ def parse(filename):
 
     return matrix, user_stats, item_stats
 
+
+def print_evaluation(f, method, results):
+    print method
+    print "   MAE: ",f.mean_absolute_error(results)
+    print "   MSE: ",f.mean_squared_error(results)
+    print "   RMSE: ",f.root_mean_squared_error(results)
+    print "   NMAE: ",f.normalized_mean_absolute_error(results)
+

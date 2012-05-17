@@ -1,0 +1,46 @@
+Reading and parsing the data into memory...
+Starting predictions
+Technique: weighted_sum
+userID, itemID, Actual_Rating, Predicted_rating, Delta_Rating
+9546 , 45 , 1.26 , 0.924392103621 , 0.335607896379
+22107 , 51 , 2.86 , -0.0888457485746 , 2.94884574857
+22401 , 98 , 0.1 , 1.72058757679 , -1.62058757679
+
+Technique: adj_weighted_sum
+userID, itemID, Actual_Rating, Predicted_rating, Delta_Rating
+9546 , 45 , 1.26 , 0.806002567282 , 0.453997432718
+22107 , 51 , 2.86 , -0.440623557413 , 3.30062355741
+22401 , 98 , 0.1 , -0.322374983453 , 0.422374983453
+
+Technique: cosine_weighted_sum
+userID, itemID, Actual_Rating, Predicted_rating, Delta_Rating
+9546 , 45 , 1.26 , -0.799243759972 , 2.05924375997
+22107 , 51 , 2.86 , -1.15671259383 , 4.01671259383
+22401 , 98 , 0.1 , 0.705371119642 , -0.605371119642
+
+Technique: cosine_adj_weighted_sum
+userID, itemID, Actual_Rating, Predicted_rating, Delta_Rating
+9546 , 45 , 1.26 , -1.13261563593 , 2.39261563593
+22107 , 51 , 2.86 , -4.99323069938 , 7.85323069938
+22401 , 98 , 0.1 , 0.232982392121 , -0.132982392121
+
+Weighted Sum
+   MAE:  1.63501374058
+   MSE:  3.81154266768
+   RMSE:  1.9523172559
+   NMAE:  0.0817506870291
+Adjusted Weighted Sum
+   MAE:  1.39233199119
+   MSE:  3.75954338777
+   RMSE:  1.9389541995
+   NMAE:  0.0696165995597
+Cosine Weighted Sum
+   MAE:  2.22710915782
+   MSE:  6.91364637231
+   RMSE:  2.62938136685
+   NMAE:  0.111355457891
+Cosine Adjusted Weighted Sum
+   MAE:  3.45960957581
+   MSE:  22.4718421052
+   RMSE:  4.74044745833
+   NMAE:  0.17298047879

@@ -1,5 +1,5 @@
 import math, random, sys
-from utils import parse
+from utils import parse, print_evaluation
 from techniques import Filter
 
 """
@@ -36,13 +36,6 @@ def gen_tests(data, size):
         tests.append([uid,iid])
 
     return tests
-
-def print_evaluation(f, method, results):
-    print method
-    print "   MAE: ",f.mean_absolute_error(results)
-    print "   MSE: ",f.mean_squared_error(results)
-    print "   RMSE: ",f.root_mean_squared_error(results)
-    print "   NMAE: ",f.normalized_mean_absolute_error(results)
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
