@@ -1,7 +1,7 @@
 recommender
 ===========
 
-Collaborative Filtering and Recommender Systems algorithm implementation for CSC466
+Collaborative Filtering and Recommender Systems algorithm implementation 
 
 Run Examples
 ============
